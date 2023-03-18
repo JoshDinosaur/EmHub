@@ -917,6 +917,20 @@ if loadstring(game:HttpGet("https://pastebin.com/raw/BnVvL2wB", true))() ~= vers
 	return loadstring(game:HttpGet("https://pastebin.com/raw/B0WsGJyx", true))() 
 end
 
+local function equipuse()
+	repeat wait()
+	until #LocalPlayer.Backpack:GetChildren() >= 1
+	for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+		v.Parent = PlrChar
+		v:Activate()
+		PlrChar.Humanoid:UnequipTools(v)
+		delay(5, function()
+			v.Parent = LocalPlayer.Backpack
+			wait()
+			v.Parent = nil
+		end)
+	end
+end
 
 local function movePart(target, plr)
 	local size = target.Size
@@ -1834,7 +1848,7 @@ commands.spam = function(cmd)
 		while spamming do
 			spawn(function()
 				for i = 1,100 do
-					chat(cmd.." "..tostring(math.random(0, 100)))
+					chat(cmd:lower())
 				end
 			end)
 			wait(spamSpeed)
@@ -2282,25 +2296,52 @@ commands.sudo = function(t,v)
 end
 wait()
 
-commands.vgcrash = function()
-	game.Players:Chat(prefix.."antivg off")
+commands.army = function()
 	chat("removetools me")
-	task.wait()
-	chat("gear me 94794847")
-	for i = 1,2 do
-		chat("skydive me")
+	task.wait(1)
+	game.Players:Chat(prefix.."spam gear me 209290837")
+	task.wait(5)
+	game.Players:Chat(prefix.."unspam")
+	task.wait(.1)
+	repeat wait()
+	until #LocalPlayer.Backpack:GetChildren() >= 99
+	for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+		v.Parent = PlrChar
+		v:Activate()
 	end
+end
+wait()
+
+commands.army = function()
+	chat("removetools me")
+	task.wait(1)
+	game.Players:Chat(prefix.."spam gear me 209290837")
+	task.wait(5)
+	game.Players:Chat(prefix.."unspam")
+	task.wait(.1)
+	repeat wait()
+	until #LocalPlayer.Backpack:GetChildren() >= 99
+	for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+		v.Parent = PlrChar
+		v:Activate()
+	end
+end
+wait()
+
+commands.vgcrash = function()
+	chat("removetools me")
+	task.wait(.1)
+	chat("gear me 94794847")
 	task.wait()
 	repeat wait()
 	until #LocalPlayer.Backpack:GetChildren() == 1
 	for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
 		v.Parent = PlrChar
+		v:Activate()
 	end
-	task.wait()
 	game.Players:Chat(prefix.."silcrash")
 end
 wait()
-
 
 commands.kickcheck = function(plr)
 	local target = FindPlayer(plr)
@@ -4934,22 +4975,17 @@ end
 wait()
 
 commands.silcrash = function()
-	chat("blind all")
-	task.wait()
-	for i = 1,3 do
-		chat("size all .3")
+	for i = 1,10 do
+		for i = 1,3 do chat("size all .3") end
+		chat("freeze all,all,all")
+		for i = 1,3 do chat("size all 10") end
+		for i = 1,13 do
+			chat("clone all,all,all")
+		end
+		task.wait(.01)
 	end
 	task.wait()
-	chat("freeze all,all,all")
-	for i = 1,3 do
-		chat("size all 10")
-	end
-	task.wait()
-	for i = 1,13 do
-		chat("clone all,all,all")
-	end
-	task.wait()
-	chat("unchar all")
+	chat("unchar all ")
 	notif("Server has been silent crashed")
 end
 wait()
